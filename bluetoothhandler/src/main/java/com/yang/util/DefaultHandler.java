@@ -30,7 +30,7 @@ class DefaultHandler extends Handler{
             case DefaultGlobalConstants.HandlerState.BLUETOOTH_SWITCH_OPEN:
                 // 蓝牙打开 刷新
                 if (bluetoothSwitchCallBack != null)
-                    bluetoothSwitchCallBack.swtich(true);
+                    bluetoothSwitchCallBack.bluetoothSwitch(true);
                 DefaultGlobalConstants.bluetoothSwitch = true;
                 break;
             case DefaultGlobalConstants.HandlerState.BLUETOOTH_SWITCH_CLOSE:
@@ -39,7 +39,7 @@ class DefaultHandler extends Handler{
                     bluetoothDateCallBack.readBluetoothDate(new byte[]{}, false);
                 BluetoothUtil.close();
                 if (bluetoothSwitchCallBack != null)
-                    bluetoothSwitchCallBack.swtich(false);
+                    bluetoothSwitchCallBack.bluetoothSwitch(false);
                 DefaultGlobalConstants.bluetoothSwitch = false;
                 break;
             case DefaultGlobalConstants.HandlerState.BLUETOOTH_SEARCH_OPEN:

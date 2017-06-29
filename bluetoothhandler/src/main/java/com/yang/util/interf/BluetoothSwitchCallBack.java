@@ -5,5 +5,5 @@ package com.yang.util.interf;
  */
 
 public interface BluetoothSwitchCallBack {
-    void swtich(boolean flag);
+    void bluetoothSwitch(boolean flag);
 }
