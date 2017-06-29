@@ -14,8 +14,16 @@ BluetoothHandler
 
         dependencies {
             ...
-            compile 'com.github.Yangandmore:BluetoothHandler:V1.0' // 添加项
+            compile 'com.github.Yangandmore:BluetoothHandler:-SNAPSHOT' // 添加项
         }
+
+
+        AndroidManifest.xml:
+        <uses-sdk
+                tools:overrideLibrary="com.yang.util"/>
+
+
+
 
 ### 1.在Application中主功能初始化
         public class XXX extends Application {
@@ -46,7 +54,20 @@ BluetoothHandler
             BluetoothInit.unRegisterBroadcaseRecevier();
         }
 
-### 3.在需要搜索的地方开启蓝牙搜索及蓝牙搜索关闭的地方添加相应功能,在搜索开启状态返回true的同时也会返回相应的蓝牙对象,其中包含他的名字和地址.当然也可以手动关闭蓝牙搜索功能.
+### 3.可以在项目中添加监听器已监听蓝牙是否打开或关闭.
+        BluetoothUtil.listenerBluetoothSwitch(new BluetoothSwitchCallBack() {
+                    @Override
+                    public void bluetoothSwitch(boolean flag) {
+                        if (flag) {
+                            Toast.makeText(MainActivity.this, "蓝牙已打开", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "蓝牙已关闭", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+### 4.在需要搜索的地方开启蓝牙搜索及蓝牙搜索关闭的地方添加相应功能,在搜索开启状态返回true的同时也会返回相应的蓝牙对象,其中包含他的名字和地址.当然也可以手动关闭蓝牙搜索功能.
 
         // 蓝牙的搜索及蓝牙搜索结束的状态回调
         BluetoothUtil.openSearchBluetooth(new BluetoothSearchCallBack() {
@@ -66,7 +87,7 @@ BluetoothHandler
         // 手动关闭蓝牙搜索
         BluetoothUtil.closeSearchBluetooth();
 
-### 4.开始对蓝牙的连接通信,返回的数据以原始16进制数据读取并传递,当然也可以手动断开蓝牙连接,一般情况下一定要及时关闭蓝牙连接.
+### 5.开始对蓝牙的连接通信,返回的数据以原始16进制数据读取并传递,当然也可以手动断开蓝牙连接,一般情况下一定要及时关闭蓝牙连接.
         // 连接
         BluetoothUtil.connect(info, new BluetoothDateCallBack() {
             @Override
