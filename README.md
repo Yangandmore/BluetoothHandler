@@ -18,12 +18,6 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
         }
 
 
-        AndroidManifest.xml:
-        <uses-sdk
-                tools:overrideLibrary="com.yang.util"/>
-
-
-
 
 ### 1.在Application中主功能初始化
         public class XXX extends Application {
