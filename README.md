@@ -14,7 +14,7 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
 
         dependencies {
             ...
-            compile 'com.github.Yangandmore:BluetoothHandler:-SNAPSHOT' // 添加项
+            compile 'com.github.Yangandmore:BluetoothHandler:V1.0' // 添加项
         }
 
 
