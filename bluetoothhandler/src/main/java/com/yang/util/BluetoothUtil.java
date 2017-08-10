@@ -65,6 +65,7 @@ public class BluetoothUtil {
         // 蓝牙功能未打开
         if (!DefaultBluetoothUtil.isBluetoothEnabled())
             throw new BluetoothSwitchCloseException();
+
         if (DefaultBluetoothUtil.getBluetoothAdapter().isDiscovering())
             closeSearchBluetooth();
         DefaultBluetoothUtil.getBluetoothAdapter().startDiscovery();
