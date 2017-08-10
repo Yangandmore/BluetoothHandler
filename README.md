@@ -1,6 +1,6 @@
-BluetoothHandler
+BluetoothHandler（非低频蓝牙RFCOMM通信）
 ===================================
-说明：用于连接设备蓝牙并发送或接收AT指令,其中已添加功能权限和蓝牙状态等广播接收，只需在回调接口中处理即可.第一个上传项目，有问题的地方希望指出.
+说明：用于连接设备蓝牙并发送或接收AT指令,其中已添加功能权限和蓝牙状态等广播接收，只需在回调接口中处理即可，此蓝牙连接只能一对一连接并传递数据，第一个上传项目，有问题的地方希望指出.
 
 在项目的build文件下添加依赖并Make
 -----------------------------------
@@ -14,14 +14,8 @@ BluetoothHandler
 
         dependencies {
             ...
-            compile 'com.github.Yangandmore:BluetoothHandler:-SNAPSHOT' // 添加项
+            compile 'com.github.Yangandmore:BluetoothHandler:V1.0' // 添加项
         }
-
-
-        AndroidManifest.xml:
-        <uses-sdk
-                tools:overrideLibrary="com.yang.util"/>
-
 
 
 
