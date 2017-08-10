@@ -3,6 +3,9 @@ package com.yang.util;
 import android.bluetooth.BluetoothDevice;
 import android.text.TextUtils;
 
+import com.yang.util.exception.BluetoothSupportedException;
+import com.yang.util.exception.BluetoothSwitchCloseException;
+import com.yang.util.exception.InputIncompleteException;
 import com.yang.util.interf.BluetoothDateCallBack;
 import com.yang.util.interf.BluetoothSearchCallBack;
 import com.yang.util.interf.BluetoothSwitchCallBack;
@@ -25,24 +28,31 @@ public class BluetoothUtil {
     }
 
     // 得到蓝牙一配对过的对象
-    public static List<BlueInfo> getBondedDevices() {
+    public static List<BlueInfo> getBondedDevices() throws BluetoothSupportedException, BluetoothSwitchCloseException {
         List<BlueInfo> list = new ArrayList<BlueInfo>();
-        // 确保打开蓝牙功能
-        if (DefaultBluetoothUtil.isBluetootoReadly()) {
 
-            Set<BluetoothDevice> pairedDevices = DefaultBluetoothUtil
-                    .getBluetoothAdapter().getBondedDevices();
-            if (pairedDevices.size() > 0) {
-                BlueInfo info = null;
-                for (BluetoothDevice device : pairedDevices) {
-                    info = new BlueInfo();
-                    info.name = TextUtils.isEmpty(device.getName()) ? "未知蓝牙"
-                            : device.getName();
-                    info.address = device.getAddress();
-                    list.add(info);
-                }
+        // 确保打开蓝牙功能
+        // 设备蓝牙是否支持
+        if (!DefaultBluetoothUtil.isBluetoothSupported())
+            throw new BluetoothSupportedException();
+
+        // 蓝牙功能未打开
+        if (!DefaultBluetoothUtil.isBluetoothEnabled())
+            throw new BluetoothSwitchCloseException();
+
+        Set<BluetoothDevice> pairedDevices = DefaultBluetoothUtil
+                .getBluetoothAdapter().getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            BlueInfo info = null;
+            for (BluetoothDevice device : pairedDevices) {
+                info = new BlueInfo();
+                info.name = TextUtils.isEmpty(device.getName()) ? "未知蓝牙"
+                        : device.getName();
+                info.address = device.getAddress();
+                list.add(info);
             }
         }
+
         return list;
     }
 
@@ -60,12 +70,17 @@ public class BluetoothUtil {
     }
 
     // 开启连接
-    public static boolean connect(BlueInfo blueInfo, BluetoothDateCallBack bluetoothDateCallBack) {
+    public static void connect(BlueInfo blueInfo, BluetoothDateCallBack bluetoothDateCallBack) throws BluetoothSupportedException, BluetoothSwitchCloseException, InputIncompleteException {
+        // 设备蓝牙是否支持
+        if (!DefaultBluetoothUtil.isBluetoothSupported())
+            throw new BluetoothSupportedException();
+
         // 蓝牙功能未打开
-        if (!DefaultBluetoothUtil.isBluetootoReadly())
-            return false;
-        if (blueInfo == null && TextUtils.isEmpty(blueInfo.address) && TextUtils.isEmpty(blueInfo.name))
-            return false;
+        if (!DefaultBluetoothUtil.isBluetoothEnabled())
+            throw new BluetoothSwitchCloseException();
+
+        if (blueInfo == null && TextUtils.isEmpty(blueInfo.address) && TextUtils.isEmpty(blueInfo.name) && bluetoothDateCallBack == null)
+            throw new InputIncompleteException();
 
         // 得到相应蓝牙
         BluetoothDevice device = DefaultBluetoothUtil.getBluetoothAdapter().getRemoteDevice(blueInfo.address);
@@ -76,7 +91,6 @@ public class BluetoothUtil {
         DefaultGlobalConstants.defaultHandler.setBluetoothDateCallBack(bluetoothDateCallBack);
         DefaultGlobalConstants.defaultThread.start();
 
-        return true;
     }
 
     // 写内容

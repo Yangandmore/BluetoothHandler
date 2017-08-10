@@ -18,7 +18,6 @@ public class BluetoothInit {
         // 初始化handler
         if (DefaultGlobalConstants.defaultHandler == null)
             DefaultGlobalConstants.defaultHandler = new DefaultHandler();
-        DefaultBluetoothUtil.isBluetootoReadly();
     }
 
     // 绑定广播

@@ -29,27 +29,6 @@ public class DefaultBluetoothUtil {
         return false;
     }
 
-    // 蓝牙断言
-    public static boolean isBluetootoReadly() {
-        // 是否支持蓝牙
-        if (DefaultBluetoothUtil.isBluetoothSupported()) {
-            DefaultGlobalConstants.bluetoothSupported = true;
-            // 是否打开蓝牙
-            if (DefaultBluetoothUtil.isBluetoothEnabled()) {
-                DefaultGlobalConstants.bluetoothSwitch = true;
-            } else {
-                DefaultGlobalConstants.bluetoothSwitch = false;
-            }
-        } else {
-            DefaultGlobalConstants.bluetoothSupported = false;
-            Toast.makeText(DefaultGlobalConstants.context, "该设备不支持蓝牙", Toast.LENGTH_SHORT).show();
-        }
-        if (DefaultGlobalConstants.bluetoothSupported && DefaultGlobalConstants.bluetoothSwitch)
-            return true;
-        else
-            return false;
-    }
-
     // 得到蓝牙适配器
     public static BluetoothAdapter getBluetoothAdapter() {
         return BluetoothAdapter.getDefaultAdapter();

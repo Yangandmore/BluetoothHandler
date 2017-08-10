@@ -11,12 +11,6 @@ import java.util.UUID;
 
 class DefaultGlobalConstants {
 
-    // 是否支持蓝牙设备
-    static boolean bluetoothSupported = false;
-
-    // 蓝牙开关
-    static boolean bluetoothSwitch = false;
-
     // 蓝牙UUID
     static UUID UUID_SPP = UUID
             .fromString("00001101-0000-1000-8000-00805F9B34FB");
