@@ -57,7 +57,14 @@ public class BluetoothUtil {
     }
 
     // 打开蓝牙搜索
-    public static void openSearchBluetooth(BluetoothSearchCallBack bluetoothSDKSearchCallBack) {
+    public static void openSearchBluetooth(BluetoothSearchCallBack bluetoothSDKSearchCallBack) throws BluetoothSwitchCloseException, BluetoothSupportedException {
+        // 设备蓝牙是否支持
+        if (!DefaultBluetoothUtil.isBluetoothSupported())
+            throw new BluetoothSupportedException();
+
+        // 蓝牙功能未打开
+        if (!DefaultBluetoothUtil.isBluetoothEnabled())
+            throw new BluetoothSwitchCloseException();
         if (DefaultBluetoothUtil.getBluetoothAdapter().isDiscovering())
             closeSearchBluetooth();
         DefaultBluetoothUtil.getBluetoothAdapter().startDiscovery();
