@@ -36,6 +36,7 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
 
 
 ### 1.在Application中主功能初始化
+        ```Java
         public class XXX extends Application {
 
             @Override
