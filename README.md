@@ -26,6 +26,7 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
         }
 ```
 
+[![](https://jitpack.io/v/Yangandmore/BluetoothHandler.svg)](https://jitpack.io/#Yangandmore/BluetoothHandler)
 
 ### 版本说明:
     目前版本：
