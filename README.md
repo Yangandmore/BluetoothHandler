@@ -46,6 +46,7 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
                 BluetoothInit.init(this);
             }
         }
+        ```
 
 ### 2.在需要做蓝牙功能的地方做好蓝牙初始化及相应的蓝牙安全关闭
 
