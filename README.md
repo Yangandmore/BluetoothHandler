@@ -36,7 +36,7 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
 
 
 ### 1.在Application中主功能初始化
-        ```Java
+```Java
         public class XXX extends Application {
 
             @Override
@@ -46,7 +46,7 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
                 BluetoothInit.init(this);
             }
         }
-        ```
+```
 
 ### 2.在需要做蓝牙功能的地方做好蓝牙初始化及相应的蓝牙安全关闭
 
