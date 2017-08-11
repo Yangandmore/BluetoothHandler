@@ -51,7 +51,7 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
 ### 2.在需要做蓝牙功能的地方做好蓝牙初始化及相应的蓝牙安全关闭
 
         ...
-
+```Java
         private void init() {
                // 蓝牙功能初始化
                BluetoothInit.registerBroadcaseRecevier();
@@ -65,8 +65,11 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
             // 蓝牙功能安全关闭
             BluetoothInit.unRegisterBroadcaseRecevier();
         }
+```
 
 ### 3.可以在项目中添加监听器已监听蓝牙是否打开或关闭.
+
+```Java
         BluetoothUtil.listenerBluetoothSwitch(new BluetoothSwitchCallBack() {
             @Override
             public void bluetoothSwitch(boolean flag) {
@@ -77,10 +80,12 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
                 }
             }
         });
+```
 
 
 ### 4.可以得到手机已配对过的蓝牙对象列表。也可以在需要搜索的地方开启蓝牙搜索及蓝牙搜索关闭的地方添加相应功能,在搜索开启状态返回true的同时也会返回相应的蓝牙对象,其中包含他的名字和地址.当然也可以手动关闭蓝牙搜索功能.
 
+```Java
         // 得到手机已配对过的蓝牙对象列表
         try {
             topList.addAll(BluetoothUtil.getBondedDevices());
@@ -89,8 +94,9 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
         } catch (BluetoothSwitchCloseException e) {
             e.printStackTrace();
         }
+```
 
-
+```Java
         // 蓝牙的搜索及蓝牙搜索结束的状态回调
         try {
             BluetoothUtil.openSearchBluetooth(new BluetoothSearchCallBack() {
@@ -111,13 +117,16 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
         } catch (BluetoothSupportedException e) {
             e.printStackTrace();
         }
+```
 
-
+```Java
         // 手动关闭蓝牙搜索
         BluetoothUtil.closeSearchBluetooth();
+```
 
 ### 5.开始对蓝牙的连接通信,返回的数据以原始16进制数据读取并传递,当然也可以手动断开蓝牙连接,一般情况下一定要及时关闭蓝牙连接.
 
+```Java
         // 连接
         try {
             BluetoothUtil.connect(info, new BluetoothDateCallBack() {
@@ -145,13 +154,18 @@ BluetoothHandler（非低频蓝牙RFCOMM通信）
         } catch (InputIncompleteException e) {
             e.printStackTrace();
         }
+```
 
+```Java
         // 写数据
         try{
             BluetoothUtil.write("...");
         } catch(IOException e) {
             e.printStackTrace();
         }
+```
 
+```Java
         // 手动断开蓝牙连接
         BluetoothUtil.close();
+```
